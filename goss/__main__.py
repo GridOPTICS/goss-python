@@ -38,44 +38,46 @@
 # UNITED STATES DEPARTMENT OF ENERGY under Contract DE-AC05-76RL01830
 # -------------------------------------------------------------------------------
 
-import calendar
-from uuid import uuid4
-import time
+import logging
+import sys
+import argparse
+from argparse import ArgumentParser
+from time import sleep
+import yaml
 
-import pytz
+from gridappsd import GridAPPSD
+
+assert sys.version_info >= (3, 6), "Minimum version is python 3.6"
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO,
+                    format="'%(asctime)s: %(name)-20s - %(levelname)-6s - %(message)s")
+
+logging.getLogger('stomp.py').setLevel(logging.WARNING)
+_log = logging.getLogger("goss.__main__")
 
 
-class DifferenceBuilder(object):
-    """ Automates the building of forward and reverse cim differences
+if __name__ == '__main__':
 
-    """
+    parser = ArgumentParser()
 
-    def __init__(self, simulation_id):
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("-s", "--run-simulation", type=argparse.FileType('r'),
+                       help="Start running a simulation from a passed simulation file.")
 
-        self._simulation_id = simulation_id
-        self._forward = []
-        self._reverse = []
+    opts = parser.parse_args()
 
-    def add_difference(self, object_id, attribute, forward_value, reverse_value):
-        """ Add forward and reverse unit for an object attribute.
+    if opts.run_simulation:
+        # Example of how to pause simulation
+        def next_timestep(simulation, timestep):
+            simulation.pause()
+            sleep(1)
+            simulation.resume()
 
-         All of the parameters must be serializable for sending the GOSS message bus.
-         """
-        forward = dict(object=object_id, attribute=attribute, value=forward_value)
-        reverse = dict(object=object_id, attribute=attribute, value=reverse_value)
-        self._forward.append(forward)
-        self._reverse.append(reverse)
+        gappsd = GridAPPSD()
+        run_args = yaml.safe_load(opts.run_simulation)
 
-    def clear(self):
-        self._forward = []
-        self._reverse = []
-
-    def get_message(self):
-        epoch = calendar.timegm(time.gmtime())
-        msg = dict(command="update",
-                   input=dict(simulation_id=self._simulation_id,
-                              message=dict(timestamp=epoch,
-                                           difference_mrid=str(uuid4()),
-                                           reverse_differences=self._reverse,
-                                           forward_differences=self._forward)))
-        return msg.copy()
+        # if wanting to use the above next_timestep function use this
+        # instead of the one below.
+        # simulation = gappsd.run_simulation(run_args, next_timestep)
+        simulation = gappsd.run_simulation(run_args)
+        simulation.simulation_main_loop()

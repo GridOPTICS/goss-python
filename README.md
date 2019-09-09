@@ -1,42 +1,42 @@
-# gridappsd-python
-Python connector to gridappsd
+# goss-python
+Python connector to goss
 
 ## Installation
 
 - Clone repository
 - Install into your python environment `pip install . `
 
-## Creating a connection to GridAPPS-D
+## Creating a connection to GOSS
 
 ```` python
 
-from gridappsd import GridAPPSD
+from goss import GOSS
 
 def on_message_callback(header, message):
     print(f"header: {header} message: {message}")
 
 # Note: there are other parameters for connecting to other
-# systems thatn localhost
-gapps = GridAPPSD(username="user", password="pass")
+# systems than localhost
+goss_client = GOSS(username="user", password="pass")
 
 assert gapps.connected
 
-gapps.send('send.topic', {"foo": "bar"})
+goss_client.send('send.topic', {"foo": "bar"})
 
 # Note we are sending the function not executing the function in the second parameter
-gapps.subscribe('subscrbe.topic', on_message_callback)
+goss_client.subscribe('subscrbe.topic', on_message_callback)
 
-gapps.send('subcribe.topic', 'A message about subscription')
+goss_client.send('subcribe.topic', 'A message about subscription')
 
 time.sleep(5)
 
-gapps.close()
+goss_client.close()
 
 ````
 
 
 ## Testing
 
-The testing requires gridappsd to be running in the docker container.  First install
+The testing requires goss to be running in the docker container.  First install
 the pytest environment `pip install pytest`.  Then run pytest from the root
-of the gridappsd-python environment. 
+of the goss-python environment. 

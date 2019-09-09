@@ -39,21 +39,21 @@
 # -------------------------------------------------------------------------------
 
 DEFAULT_FNCS_LOCATION = 'tcp://localhost:5570'
-FNCS_BASE_INPUT_TOPIC = '/topic/goss.gridappsd.simulation.input'
-FNCS_BASE_OUTPUT_TOPIC = '/topic/goss.gridappsd.simulation.output'
-BASE_SIMULATION_TOPIC = '/topic/goss.gridappsd.simulation'
-BASE_SIMULATION_STATUS_TOPIC = "/topic/goss.gridappsd.simulation.log"
+FNCS_BASE_INPUT_TOPIC = '/topic/goss.goss.simulation.input'
+FNCS_BASE_OUTPUT_TOPIC = '/topic/goss.goss.simulation.output'
+BASE_SIMULATION_TOPIC = '/topic/goss.goss.simulation'
+BASE_SIMULATION_STATUS_TOPIC = "/topic/goss.goss.simulation.log"
 
-BLAZEGRAPH = "/queue/goss.gridappsd.process.request.data.powergridmodel"
-# https://gridappsd.readthedocs.io/en/latest/using_gridappsd/index.html#querying-logs
-LOGS = "/queue/goss.gridappsd.process.request.data.log"
-# https://gridappsd.readthedocs.io/en/latest/using_gridappsd/index.html#timeseries-api
-TIMESERIES = "/queue/goss.gridappsd.process.request.data.timeseries"
+BLAZEGRAPH = "/queue/goss.goss.process.request.data.powergridmodel"
+# https://goss.readthedocs.io/en/latest/using_gridappsd/index.html#querying-logs
+LOGS = "/queue/goss.goss.process.request.data.log"
+# https://goss.readthedocs.io/en/latest/using_gridappsd/index.html#timeseries-api
+TIMESERIES = "/queue/goss.goss.process.request.data.timeseries"
 
-CONFIG = "/queue/goss.gridappsd.process.request.config"
-PLATFORM_STATUS = "/queue/goss.gridappsd.process.request.status.platform"
+CONFIG = "/queue/goss.goss.process.request.config"
+PLATFORM_STATUS = "/queue/goss.goss.process.request.status.platform"
 
-BASE_TOPIC_PREFIX = "goss.gridappsd"
+BASE_TOPIC_PREFIX = "goss.goss"
 PROCESS_PREFIX = ".".join((BASE_TOPIC_PREFIX, "process"))
 REQUEST_PLATFORM_STATUS = ".".join([PROCESS_PREFIX, "request.status.platform"])
 
@@ -163,6 +163,6 @@ def simulation_input_topic(simulation_id):
 
 
 def simulation_log_topic(simulation_id):
-    """https://gridappsd.readthedocs.io/en/latest/using_gridappsd/index.html#subscribing-to-logs
+    """https://goss.readthedocs.io/en/latest/using_gridappsd/index.html#subscribing-to-logs
     """
     return "{}.{}".format(BASE_SIMULATION_STATUS_TOPIC, simulation_id)
