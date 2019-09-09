@@ -1,5 +1,7 @@
 # goss-python
-Python connector to goss
+Python connector to goss. 
+
+Requires Python 3.6 or above.
 
 ## Installation
 
