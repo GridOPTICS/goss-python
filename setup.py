@@ -41,7 +41,7 @@
 from os import path
 from setuptools import setup, find_packages
 
-__version__ = '2019.7.0'
+__version__ = '1.0'
 
 # The directory containing this file
 HERE = path.dirname(__file__)
@@ -62,18 +62,18 @@ extra_deps = {
 
 # Setup
 setup(
-    name="gridappsd",
+    name="goss",
     version=__version__,
     install_requires=['PyYaml', 'stomp.py', 'pytz', 'dateutils'],
-    description="GridAPPS-D python adapter",
+    description="GOSS python adapter",
     packages=packages,
     test_suite='tests',
     tests_require=test_deps,
     extras_require=extra_deps,
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/GRIDAPPSD/gridappsd-python",
-    author="GridAPPS-D Team",
+    url="https://github.com/GridOPTICS/goss-python",
+    author="GOSS Team",
     author_email="craig.allwardt@pnnl.gov",
     license="BSD",
     classifiers=[

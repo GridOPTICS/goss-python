@@ -37,13 +37,10 @@
 # PACIFIC NORTHWEST NATIONAL LABORATORY operated by BATTELLE for the
 # UNITED STATES DEPARTMENT OF ENERGY under Contract DE-AC05-76RL01830
 # -------------------------------------------------------------------------------
-""" GridAPPSD Python Connection Library
+""" GOSS Python Connection Library
 
-The :mod:`gridappsd` contains a connection class :class:`gridappsd.GridAPPSD` for connecting with the
-main GridAPPSD executable.
+The :mod:`goss` contains a connection class :class:`goss.GOSS` for connecting with the
+main goss executable.
 
 """
 from . goss import GOSS
-from . gridappsd import GridAPPSD
-from . difference_builder import DifferenceBuilder
-from . app_registration import ApplicationController

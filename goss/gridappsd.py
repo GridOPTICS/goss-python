@@ -44,12 +44,11 @@ import inspect
 import logging
 from logging import DEBUG, INFO, WARNING, FATAL, WARN
 
-
-from . import GOSS
-from . import topics as t
-from . loghandler import Logger
-from . import utils
-from . simulation import Simulation
+from goss import GOSS
+import topics as t
+from loghandler import Logger
+import utils
+from simulation import Simulation
 # from . configuration_types import ConfigurationType
 
 _log = logging.getLogger(inspect.getmodulename(__file__))

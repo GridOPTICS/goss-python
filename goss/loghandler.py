@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-from . import topics as t
-from . import utils
+import topics as t
+import utils
 
 
 class Logger:

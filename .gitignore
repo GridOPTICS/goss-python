@@ -97,6 +97,7 @@ ENV/
 # mkdocs documentation
 /site
 
+
 # mypy
 .mypy_cache/
 
@@ -105,3 +106,8 @@ ENV/
 
 # visual studio code
 .vscode/
+
+.metadata
+.project
+.pydevproject
+.settings
